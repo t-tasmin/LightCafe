@@ -1,5 +1,5 @@
 /*
- * All routes for Users are defined here
+ * All routes for Menus are defined here
  * Since this file is loaded in server.js into api/users,
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
@@ -24,7 +24,20 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log("Body",req.body);
+
+    let order = {};
+    db.query(`SELECT * FROM menu_dishes;`)
+    let itemName = req.body.itemName;
+    let numbernumberOfItems = req.body.numberOfItems;
+    numberOfItems = numbernumberOfItems.filter((a) => a); 
+
+    for (let index in itemName)
+    {
+      order[itemName[index]] = numberOfItems[index];
+    }
+
+    console.log(order);
+    res.render("index",order);
     
   });
 
