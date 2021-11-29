@@ -8,15 +8,12 @@
 const express = require('express');
 const router  = express.Router();
 
-
-
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM menu_dishes;`)
       .then(data => {
         const menus = data.rows;
         const menuVar= {menus};
-        console.log(menuVar);
         res.render("menus_show", menuVar);
       })
       .catch(err => {
@@ -25,5 +22,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  
   return router;
 };
