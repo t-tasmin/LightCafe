@@ -23,7 +23,7 @@ body {
 }
 
 .btn {
-  @include theme(black, white);
+  @include theme(#4F3939, white);
 }
 
 .hungry_button {

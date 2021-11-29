@@ -14,25 +14,39 @@
 </head>
 
 <body>
+
+  <header>
+    <nav class="nav_bar">
+      <div class="container_fluid">
+        <a href="/">LogoIcon</a>
+        <a href="/checkout">Shopping Cart</a>
+      </div>
+    </nav>
+  </header>
   <main>
 
     <p>Choose your Menu:</p>
 
     <form action="/menus" method="post">
-      <div>
-      <% for (let item in menus) { %>
-            <div>
-              <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <%= menus[item].name %> - $<%= menus[item].unit_price %> - <%= menus[item].number_available %></label>
-              <input type="text" name="numberOfItems">
-            </div>
-      <% } %>
+      <div class="form_layout">
+        <div>
+          <% for (let item in menus) { %>
+                <div>
+                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <%= menus[item].name %> - $<%= menus[item].unit_price %> - <%= menus[item].number_available %></label>
+                  <input type="text" name="numberOfItems">
+                </div>
+          <% } %>
+          </div>
+          <button id= "name-form" type="submit" >Submit</button>
       </div>
-      <button id= "name-form" type="submit" >Submit</button>
+
     </form>
 
   </main>
 
-
+  <footer>
+    <p>All copyrights reserved</p>
+  </footer>
 
 
 </body>
