@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Menu Page</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -14,22 +14,25 @@
 </head>
 
 <body>
-  <p>Choose your Menu:</p>
-
-  <form  action="/menus/" method="POST">
-    <div>
-    <% for (let item in menus) { %>
-        <div>
-          <input type="checkbox" name="itemName" value="itemName">
-          <label><%= menus[item].name %> - $<%= menus[item].unit_price %></label>
-          <input type="text" name="numberOfItems">
+  <main>
+    <p>Choose your Menu:</p>
+    <form  action="/menus/" method="POST">
+      <div>
+      <% for (let item in menus) { %>
+          <div>
+            <input type="checkbox" name="itemName" value="itemName">
+            <label><%= menus[item].name %> - $<%= menus[item].unit_price %></label>
+            <input type="text" name="numberOfItems">
+          </div>
+          <% } %>
         </div>
-        <% } %> 
-      </div> 
-      <button type="submit" >Submit</button>
-    </form>
-  
-   
+        <button type="submit" >Submit</button>
+      </form>
+  </main>
+
+
+
+
 </body>
 
 </html>
