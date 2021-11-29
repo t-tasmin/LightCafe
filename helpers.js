@@ -18,4 +18,4 @@ const sendSMS = function (phone_number, message){
 
 };
 
-sendSMS('4372302590', 'Your order is ready');
+sendSMS('9052135569', 'Your order is ready');
