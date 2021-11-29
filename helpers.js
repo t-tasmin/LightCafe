@@ -1,11 +1,13 @@
 // This function will send a SMS to the given phone number using twillo
+require("dotenv").config();
+
 
 const sendSMS = function (phone_number, message){
 
-  var twilio = require('twilio');
+  let twilio = require('twilio');
 
-  // Find your account sid and auth token in your Twilio account Console.
-  var client = new twilio('AC6642a5ff5c418d4047d13dcd6dd90a38', 'f9b073f566885e555d6e77a01762d8f9');
+  // account sid and auth token in your Twilio account Console.
+  let client = new twilio(process.env.ACCOUNTSID, process.env.AUTH);
 
   // Send the text message.
   client.messages.create({
@@ -16,4 +18,4 @@ const sendSMS = function (phone_number, message){
 
 };
 
-sendSMS('9052135569', 'Your order is ready');
+sendSMS('4372302590', 'Your order is ready');

@@ -23,6 +23,13 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/", (req, res) => {
+    console.log("Body",req.body);
+    console.log("params",req.params);
+    console.log("query",req.query);
+    res.send('Done');
+  });
+
   
   return router;
 };
