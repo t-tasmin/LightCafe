@@ -15,19 +15,21 @@
 
 <body>
   <main>
+
     <p>Choose your Menu:</p>
-    <form  action="/menus/" method="POST">
+
+    <form action="/menus" method="post">
       <div>
       <% for (let item in menus) { %>
-          <div>
-            <input type="checkbox" name="itemName" value="itemName">
-            <label><%= menus[item].name %> - $<%= menus[item].unit_price %></label>
-            <input type="text" name="numberOfItems">
-          </div>
-          <% } %>
-        </div>
-        <button type="submit" >Submit</button>
-      </form>
+            <div>
+              <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <%= menus[item].name %> - $<%= menus[item].unit_price %> - <%= menus[item].number_available %></label>
+              <input type="text" name="numberOfItems">
+            </div>
+      <% } %>
+      </div>
+      <button id= "name-form" type="submit" >Submit</button>
+    </form>
+
   </main>
 
 
