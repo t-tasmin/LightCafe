@@ -26,17 +26,26 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
 
     let order = {};
-    db.query(`SELECT * FROM menu_dishes;`)
-    let itemName = req.body.itemName;
+    let items = req.body.itemName;
+    let itemNames=[];
+    let unitPrice=[];
+
+    for (let i in items){
+      let s= items[i].split("+");
+      itemNames.push(s[0]);
+      unitPrice.push(s[1]);
+    }
+
     let numbernumberOfItems = req.body.numberOfItems;
     numberOfItems = numbernumberOfItems.filter((a) => a); 
 
-    for (let index in itemName)
+    for (let index in itemNames)
     {
-      order[itemName[index]] = numberOfItems[index];
+      order[itemNames[index]] = numberOfItems[index]*unitPrice[index];
     }
 
     console.log(order);
+   
     res.render("index",order);
     
   });
