@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-
+const {countSubTotal, countTax} = require('../utils/index');
 
 module.exports = (db) => {
 
@@ -83,11 +83,27 @@ module.exports = (db) => {
         
             let orders  = [];
             for (let index in itemNames) {
-              orders[index] = {itemName: itemNames[index], unitPrice: unitPrices[index], numberOfItem: numberOfItems[index] ,totalPrice:numberOfItems[index] * unitPrices[index]};
+              orders[index] = {
+                itemName: itemNames[index],
+                unitPrice: unitPrices[index],
+                numberOfItem: numberOfItems[index] ,
+                totalPrice: numberOfItems[index] * unitPrices[index]
+              };
             }
 
             console.log(orders);
-            let orderVar = {orders};
+            //subTotal
+        let subTotal = countSubTotal(orders);
+        //tax calculation
+        let tax = countTax(subTotal)();
+        //Total bill
+        let totalAmount = subTotal + tax;
+
+        console.log('subTotal', subTotal);
+        console.log('tax', tax);
+        console.log('totalAmount', totalAmount);
+
+        let orderVar = {orders, subTotal, tax, totalAmount};
             res.render("order_checkout",orderVar);
                   
           })
