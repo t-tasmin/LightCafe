@@ -35,6 +35,7 @@ module.exports = (db) => {
 
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
+    console.log("###ITEMS",numberOfItems);
     numberOfItems = numberOfItems.filter((a) => a);
 
     //Query to update number_available for each menu_dishes
