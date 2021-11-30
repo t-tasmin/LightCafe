@@ -20,6 +20,7 @@ CREATE TABLE menu_dishes (
   name VARCHAR(255) NOT NULL,
   unit_price INTEGER NOT NULL, -- price in cents
   number_available INTEGER NOT NULL, -- number of dishes available
+  prep_time INTEGER NOT NULL,
   restaurant_id INTEGER -- FK
 );
 
