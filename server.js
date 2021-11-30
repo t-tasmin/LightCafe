@@ -44,6 +44,11 @@ app.get("/", (req, res) => {
 });
 //**********************************************************************/
 
+//*******DEMO ROUTE FOR CHECKOUT_ORDER PAGE *************/
+
+app.get('/checkout', (req,res) => {
+  res.render("order_checkout");
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
