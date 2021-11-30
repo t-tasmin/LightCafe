@@ -8,7 +8,10 @@
 const express = require('express');
 const router  = express.Router();
 
+
 module.exports = (db) => {
+
+  //**************************GET ROUTE***************************/
   router.get("/", (req, res) => {
     const queryString = `
     SELECT * 
@@ -18,7 +21,7 @@ module.exports = (db) => {
     db.query(queryString)
       .then(data => {
         const menus = data.rows;
-        const menuVar= {menus};
+        const menuVar = {menus};
         res.render("menus_show", menuVar);
       })
       .catch(err => {
@@ -28,52 +31,76 @@ module.exports = (db) => {
       });
   });
 
-  
+ //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
 
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
-    numberOfItems = numberOfItems.filter((a) => a); 
+    numberOfItems = numberOfItems.filter((a) => a);
 
-    let queryString = `
-    SELECT unit_price
-    FROM menu_dishes
-    WHERE name in ( 
-     `;
-     for (let i=0; i<itemNames.length; i++)
-     {
-       if (i === itemNames.length-1)
-       {queryString+=`'${itemNames[i]}');`;}
-       else
-       {queryString+=`'${itemNames[i]}', `;}
-     }
+    //Query to update number_available for each menu_dishes
+    let queryString1 = `UPDATE menu_dishes SET number_available = CASE `;
+ 
+    for (let i = 0; i < itemNames.length; i++) {
+      queryString1 += `WHEN name = '${itemNames[i]}'  THEN number_available -${numberOfItems[i]} `;
+    }
+
+    queryString1 += `END `;
+    queryString1 += `WHERE name IN (`;
+
+    for (let i = 0; i < itemNames.length; i++) {
+      if (i === itemNames.length - 1) {
+        queryString1 += `'${itemNames[i]}') RETURNING *;`;
+      } else {
+        queryString1 += `'${itemNames[i]}', `;
+      }
+    }
     
-    console.log(queryString);
-    
-    db.query(queryString)
+    db.query(queryString1)
       .then(data => {
-        const unitPriceObj = data.rows;
-        let unitPrices= unitPriceObj.map(function (element){
-          return element.unit_price;
-        });
-        
-        let orders  = [];
-        for (let index in itemNames)
-        {
-          orders[index] ={itemName: itemNames[index], unitPrice: unitPrices[index], numberOfItem: numberOfItems[index] ,totalPrice:numberOfItems[index]*unitPrices[index]};
-        }
+        console.log(data.rows); // Display which items are updated
 
-        console.log(orders);
-        let orderVar = {orders};
-        res.render("order_checkout",orderVar);
+        //Query to select unit prices for each selected menu_dishes
+        let queryString2 = `
+        SELECT unit_price
+        FROM menu_dishes
+        WHERE name in ( 
+        `;
+        for (let i = 0; i < itemNames.length; i++) {
+          if (i === itemNames.length - 1) {
+            queryString2 += `'${itemNames[i]}');`;
+          } else {
+            queryString2 += `'${itemNames[i]}', `;
+          }
+        }
+    
+        db.query(queryString2)
+          .then(data => {
+            const unitPriceObj = data.rows;
+            let unitPrices = unitPriceObj.map(function(element) {
+              return element.unit_price;
+            });
+        
+            let orders  = [];
+            for (let index in itemNames) {
+              orders[index] = {itemName: itemNames[index], unitPrice: unitPrices[index], numberOfItem: numberOfItems[index] ,totalPrice:numberOfItems[index] * unitPrices[index]};
+            }
+
+            console.log(orders);
+            let orderVar = {orders};
+            res.render("order_checkout",orderVar);
                   
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
       
+      })
+      .catch(err => console.error('query error', err.stack));
+
+    
     
   });
 
