@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Checkout Page</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/order_checkout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <nav class="nav_bar">
+      <div class="container_fluid">
+        <a href="/" class="logo"><i class="fas fa-utensils"></i></a>
+        <a href="/checkout"><i class="fas fa-shopping-cart"></i></a>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+    <h3>Your Order</h3>
+
+    <section class="final_order">
+      <div class="order_reciept">
+        <div class="item">
+          <span>Curry Chicken</span>
+          <span>$10 * 1</span>
+          <span>10</span>
+        </div>
+        <div class="item">
+          <span>Butter Chicken</span>
+          <span>$15 * 2</span>
+          <span>30</span>
+        </div>
+        <div class="item">
+          <span>Vegetable Salad</span>
+          <span>$9 * 1</span>
+          <span>9</span>
+        </div>
+        <div class="total_amount">
+          <div class="amount">
+            <span>Sub Total</span> <span> 30</span>
+          </div>
+          <div class="amount">
+            <span>Tax</span> <span> 13</span>
+          </div>
+          <div class="amount">
+             <span>Total</span> <span>43</span>
+          </div>
+        </div>
+      </div>
+      <label>Enter your phone number </label>
+      <input type="tel" placeholder="e.g. 123-234-1234">
+      <button id= "name-form" class="btn" type="submit" >Checkout</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>All copyrights reserved</p>
+  </footer>
+
+
+</body>
+
+</html>
