@@ -7,17 +7,16 @@
 
 const express = require('express');
 const router  = express.Router();
-const {countSubTotal, countTax} = require('../utils/index');
-
+const {countSubTotal, countTax} = require('../utils/index')
 module.exports = (db) => {
 
   //**************************GET ROUTE***************************/
   router.get("/", (req, res) => {
     const queryString = `
-    SELECT * 
+    SELECT *
     FROM menu_dishes;
     `;
-  
+
     db.query(queryString)
       .then(data => {
         const menus = data.rows;
@@ -120,6 +119,6 @@ module.exports = (db) => {
     
   });
 
-  
+
   return router;
 };
