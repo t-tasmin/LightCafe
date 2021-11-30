@@ -32,6 +32,7 @@ module.exports = (db) => {
 
     
     let items = req.body.itemName;
+    console.log("Body***********",req.body);
     let numberOfItems = req.body.numberOfItems;
     numberOfItems = numberOfItems.filter((a) => a); 
 
