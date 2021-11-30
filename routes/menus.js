@@ -10,7 +10,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM menu_dishes;`)
+    const queryString = `
+    SELECT * 
+    FROM menu_dishes;
+    `;
+  
+    db.query(queryString)
       .then(data => {
         const menus = data.rows;
         const menuVar= {menus};
@@ -46,6 +51,14 @@ module.exports = (db) => {
 
     console.log(order);
    
+    queryParams = ['('+itemNames.join(',')+')'];
+    let queryString = `
+    UPDATE menu_dishes
+    SET number_available = number_available -1
+    WHERE name in $1
+     `;
+    
+    console.log(queryString, queryParams);
     res.render("index",order);
     
   });
