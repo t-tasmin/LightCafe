@@ -28,23 +28,15 @@
     <h3>Your Order</h3>
 
     <section class="final_order">
-      <div class="order_reciept">
+      <div class="order_receipt">
+        <% for (let item in orders) { %>
         <div class="item">
-          <span>Curry Chicken</span>
-          <span>$10 * 1</span>
-          <span>10</span>
+          <span><%=orders[item].itemName%></span>
+          <span>$<%=orders[item].unitPrice%></span>
+          <span>$<%=orders[item].totalPrice%></span>
         </div>
-        <div class="item">
-          <span>Butter Chicken</span>
-          <span>$15 * 2</span>
-          <span>30</span>
-        </div>
-        <div class="item">
-          <span>Vegetable Salad</span>
-          <span>$9 * 1</span>
-          <span>9</span>
-        </div>
-        <div class="total_amount">
+        <% } %>
+         <div class="total_amount">
           <div class="amount">
             <span>Sub Total</span> <span> 30</span>
           </div>
