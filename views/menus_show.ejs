@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+  <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
@@ -18,8 +18,8 @@
   <header>
     <nav class="nav_bar">
       <div class="container_fluid">
-        <a href="/">LogoIcon</a>
-        <a href="/checkout">Shopping Cart</a>
+        <a href="/" class="logo"><i class="fas fa-utensils"></i></a>
+        <a href="/checkout"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
   </header>
@@ -29,15 +29,15 @@
 
     <form action="/menus" method="post">
       <div class="form_layout">
-        <div>
+        <div class="menu_items">
           <% for (let item in menus) { %>
-                <div>
-                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <%= menus[item].name %> - $<%= menus[item].unit_price %> - <%= menus[item].number_available %></label>
-                  <input type="text" name="numberOfItems">
+                <div class="item">
+                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <span class="item_name"> <%= menus[item].name %> </span>  <span class="item_price">$<%= menus[item].unit_price %> </span> </label>
+                  <input type="number" name="numberOfItems" min="1" max="<%= menus[item].number_available %>">
                 </div>
           <% } %>
           </div>
-          <button id= "name-form" type="submit" >Submit</button>
+          <button id= "name-form" class="btn" type="submit" >Checkout</button>
       </div>
 
     </form>
