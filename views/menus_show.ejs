@@ -32,7 +32,7 @@
         <div class="menu_items">
           <% for (let item in menus) { %>
                 <div class="item">
-                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>"> <span class="item_name"> <%= menus[item].name %> </span>  <span class="item_price">$<%= menus[item].unit_price %> </span> </label>
+                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>+<%= menus[item].unit_price %>"> <span class="item_name"> <%= menus[item].name %> </span>  <span class="item_price">$<%= menus[item].unit_price %> </span> </label>
                   <input type="number" name="numberOfItems" min="1" max="<%= menus[item].number_available %>">
                 </div>
           <% } %>
