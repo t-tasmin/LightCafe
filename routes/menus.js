@@ -30,26 +30,29 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
 
-    let order = {};
+    
     let items = req.body.itemName;
+    let numberOfItems = req.body.numberOfItems;
+    numberOfItems = numberOfItems.filter((a) => a); 
+
     let itemNames=[];
-    let unitPrice=[];
+    let unitPrices=[];
+    let orders  = [];
 
     for (let i in items){
       let s= items[i].split("+");
       itemNames.push(s[0]);
-      unitPrice.push(s[1]);
+      unitPrices.push(s[1]);
     }
-
-    let numbernumberOfItems = req.body.numberOfItems;
-    numberOfItems = numbernumberOfItems.filter((a) => a); 
 
     for (let index in itemNames)
     {
-      order[itemNames[index]] = numberOfItems[index]*unitPrice[index];
+      orders[index] ={itemName: itemNames[index], unitPrice: unitPrices[index], totalPrice:numberOfItems[index]*unitPrices[index]};
     }
 
-    console.log(order);
+    console.log(orders);
+    let orderVar = {orders};
+    res.render("order_checkout",orderVar);
    
     queryParams = ['('+itemNames.join(',')+')'];
     let queryString = `
@@ -57,9 +60,7 @@ module.exports = (db) => {
     SET number_available = number_available -1
     WHERE name in $1
      `;
-    
     console.log(queryString, queryParams);
-    res.render("index",order);
     
   });
 
