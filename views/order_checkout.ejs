@@ -28,11 +28,11 @@
     <h3>Your Order</h3>
 
     <section class="final_order">
-      <div class="order_receipt">
+      <div class="order_reciept">
         <% for (let item in orders) { %>
         <div class="item">
           <span><%=orders[item].itemName%></span>
-          <span>$<%=orders[item].unitPrice%></span>
+          <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
           <span>$<%=orders[item].totalPrice%></span>
         </div>
         <% } %>
