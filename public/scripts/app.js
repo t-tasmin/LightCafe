@@ -1,4 +1,5 @@
 // Client facing scripts here
+/*
 $(document).ready(function(){
   
   $("form").submit(function(){
@@ -50,11 +51,11 @@ $.post("/", formValues, function(data){
 
 });
 });
-*/
+
 
 });// End of form submit
 
 });// End of document ready
 
 
-
+*/
