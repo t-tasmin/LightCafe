@@ -47,7 +47,7 @@ module.exports = (db) => {
 
     for (let index in itemNames)
     {
-      orders[index] ={itemName: itemNames[index], unitPrice: unitPrices[index], totalPrice:numberOfItems[index]*unitPrices[index]};
+      orders[index] ={itemName: itemNames[index], unitPrice: unitPrices[index], numberOfItem: numberOfItems[index] ,totalPrice:numberOfItems[index]*unitPrices[index]};
     }
 
     console.log(orders);
