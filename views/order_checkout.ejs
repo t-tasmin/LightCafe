@@ -29,30 +29,31 @@
 
     <section class="final_order">
       <div class="order_reciept">
-        <% for (let item in orders) { %>
-        <div class="item">
-          <span><%=orders[item].itemName%></span>
-          <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
-          <span>$<%=orders[item].totalPrice%></span>
-        </div>
-        <% } %>
-         <div class="total_amount">
-          <div class="amount">
-            <span>Sub Total</span> <span> <%= subTotal %> </span>
-          </div>
-          <div class="amount">
-            <span>Tax</span> <span> <%= tax %> </span>
-          </div>
-          <div class="amount">
-             <span>Total</span> <span><%= totalAmount %></span>
-          </div>
-        </div>
+        <form action="/checkout" method="post">
+          <% for (let item in orders) { %>
+            <div class="item">
+              <span><%=orders[item].itemName%></span>
+              <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
+              <span>$<%=orders[item].totalPrice%></span>
+            </div>
+            <% } %>
+            <div class="total_amount">
+              <div class="amount">
+                <span>Sub Total</span> <span> <%= subTotal %> </span>
+              </div>
+              <div class="amount">
+                <span>Tax</span> <span> <%= tax %> </span>
+              </div>
+              <div class="amount">
+                 <span>Total</span> <span><%= totalAmount %></span>
+              </div>
+            </div>
+            <label for="telephone">Enter your phone number </label>
+            <input id= "telephone" type="tel" name='telephone' placeholder="e.g. 123-234-1234">
+            <button  class="btn" type="submit" >Checkout</button>
+        </form>
       </div>
-      <label for="telephone">Enter your phone number </label>
-      <input id= "telephone" type="tel" placeholder="e.g. 123-234-1234">
-      <button id= "name-form" class="btn" type="submit" >Checkout</button>
     </section>
-
   </main>
 
   <footer>
