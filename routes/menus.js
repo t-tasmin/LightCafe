@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const {countSubTotal, countTax} = require('../utils/index')
+const {countSubTotal, countTax, rounded} = require('../utils/index')
 module.exports = (db) => {
 
   //**************************GET ROUTE***************************/
@@ -32,7 +32,7 @@ module.exports = (db) => {
 
  //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
-    
+    console.log("......Incoming.......");
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
     console.log("###ITEMS",numberOfItems);
@@ -40,7 +40,7 @@ module.exports = (db) => {
 
     //Query to update number_available for each menu_dishes
     let queryString1 = `UPDATE menu_dishes SET number_available = CASE `;
- 
+
     for (let i = 0; i < itemNames.length; i++) {
       queryString1 += `WHEN name = '${itemNames[i]}'  THEN number_available -${numberOfItems[i]} `;
     }
@@ -55,7 +55,7 @@ module.exports = (db) => {
         queryString1 += `'${itemNames[i]}', `;
       }
     }
-    
+
     db.query(queryString1)
       .then(data => {
         console.log(data.rows); // Display which items are updated
@@ -64,7 +64,7 @@ module.exports = (db) => {
         let queryString2 = `
         SELECT unit_price
         FROM menu_dishes
-        WHERE name in ( 
+        WHERE name in (
         `;
         for (let i = 0; i < itemNames.length; i++) {
           if (i === itemNames.length - 1) {
@@ -73,14 +73,14 @@ module.exports = (db) => {
             queryString2 += `'${itemNames[i]}', `;
           }
         }
-    
+
         db.query(queryString2)
           .then(data => {
             const unitPriceObj = data.rows;
             let unitPrices = unitPriceObj.map(function(element) {
               return element.unit_price;
             });
-        
+
             let orders  = [];
             for (let index in itemNames) {
               orders[index] = {
@@ -97,27 +97,27 @@ module.exports = (db) => {
         //tax calculation
         let tax = countTax(subTotal)();
         //Total bill
-        let totalAmount = subTotal + tax;
+        let totalAmount = rounded(subTotal + tax);
 
         console.log('subTotal', subTotal);
         console.log('tax', tax);
         console.log('totalAmount', totalAmount);
 
         let orderVar = {orders, subTotal, tax, totalAmount};
-            res.render("order_checkout",orderVar);
-                  
+            // res.render("order_checkout",orderVar);
+            res.redirect("/checkout");
           })
           .catch(err => {
             res
               .status(500)
               .json({ error: err.message });
           });
-      
+
       })
       .catch(err => console.error('query error', err.stack));
 
-    
-    
+
+
   });
 
 
