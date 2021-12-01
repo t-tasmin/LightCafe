@@ -1,23 +1,62 @@
 $primary_color : #BC7869;
 $secondary_color : #F5B57A;
+$font_size : 2em;
+
 body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  min-height: 100vh;
+
   background: linear-gradient(165.26deg, $primary_color 1.96%, rgba(234, 198, 196, 0) 80.75%), url(https://images.unsplash.com/photo-1605456831549-099f7e02822e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2574&q=80.jpg) no-repeat center center fixed;
   background-size: cover;
-  height: 100%;
-  overflow: hidden;
+  height: 100vh;
+  // overflow: hidden;
+  font-size: $font_size;
+  nav{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    padding: 1em 1em;
+    .container_fluid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a{
+        text-decoration: none;
+        i{
+          color:#4F3939;
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
+  main {
+    width: 100vw;
+    text-align: center;
+  }
+  footer {
+    width: 100%;
+    text-align: center;
+    font-size: 0.5em;
+    color: #4d4a4a;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 @mixin theme($theme, $theme_color) {
   text-decoration: none;
   color: $theme_color;
   background: $theme;
-  padding: 24px 60px;
-  font-size: 3rem;
-  border-radius: 30px;
+  padding: 15px 12px;
+  font-size: 1em;
+  border-radius: 25px;
   border: none;
   box-shadow: 2px 2px 8px 3px $theme_color;
 }
@@ -27,5 +66,5 @@ body {
 }
 
 .hungry_button {
-  padding-top: 20em;
+  padding-top: 2em;
 }
