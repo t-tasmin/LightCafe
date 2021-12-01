@@ -20,6 +20,7 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 app.set("view engine", "ejs");
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
@@ -45,10 +46,11 @@ app.get("/", (req, res) => {
 //**********************************************************************/
 
 //*******DEMO ROUTE FOR CHECKOUT_ORDER PAGE *************/
-
-app.get('/checkout', (req,res) => {
-  res.render("order_checkout");
-})
+const checkoutRoutes = require("./routes/demo");
+app.use("/checkout", checkoutRoutes(db));
+// app.get('/checkout', (req,res) => {
+//   res.render("order_checkout");
+// })
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
