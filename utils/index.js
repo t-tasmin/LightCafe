@@ -1,3 +1,8 @@
+const rounded = (num) => {
+  return Math.round(num * 100) / 100;
+}
+
+
 const countSubTotal = (orderArr) => {
     //getting totalPrice of each items and store in array
     let totalPriceArr = orderArr.map(el =>  el['totalPrice']);
@@ -10,8 +15,10 @@ const countSubTotal = (orderArr) => {
 const countTax = (subTotal) => {
   const tax = 0.13;
   return () => {
-    return Math.round((subTotal * tax) * 100) / 100;
+    return rounded(subTotal * tax);
   }
 };
 
-module.exports = {countSubTotal, countTax};
+
+
+module.exports = {countSubTotal, countTax, rounded};
