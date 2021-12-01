@@ -32,10 +32,10 @@ module.exports = (db) => {
 
  //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
-    console.log("......Incoming.......");
+
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
-    console.log("###ITEMS",numberOfItems);
+    // console.log("###ITEMS",numberOfItems); //-------------------------------------x
     numberOfItems = numberOfItems.filter((a) => a);
 
     //Query to update number_available for each menu_dishes
@@ -58,7 +58,7 @@ module.exports = (db) => {
 
     db.query(queryString1)
       .then(data => {
-        console.log(data.rows); // Display which items are updated
+        // console.log(data.rows); // Display which items are updated //-------------------------------x
 
         //Query to select unit prices for each selected menu_dishes
         let queryString2 = `
@@ -91,7 +91,7 @@ module.exports = (db) => {
               };
             }
 
-            console.log(orders);
+            // console.log(orders); //-----------------------------------------------x
             //subTotal
         let subTotal = countSubTotal(orders);
         //tax calculation

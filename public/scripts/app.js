@@ -59,3 +59,7 @@ $.post("/", formValues, function(data){
 
 
 */
+
+$(document).on('click', () => {
+  $('#err_msg').slideUp(1000);
+})

@@ -35,3 +35,11 @@ CREATE TABLE orders (
   end_time TIMESTAMP NOT NULL,
   restaurant_id INTEGER -- FK
 );
+
+CREATE TABLE queue (
+  id SERIAL PRIMARY KEY NOT NULL,
+  customer_phone VARCHAR(255) NOT NULL,
+  customer_name VARCHAR(255) NOT NULL,
+  customer_order VARCHAR(255) NOT NULL,
+  est_pickup_time TIMESTAMP NOT NULL
+);
