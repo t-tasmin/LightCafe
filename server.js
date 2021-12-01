@@ -53,9 +53,10 @@ const menuRoutes = require("./routes/menus");
 app.use("/menus", menuRoutes(db));
 //**********************************************************************/
 
-const orderRoutes = require('./routes/orders');
-app.use('/orders', orderRoutes(db));
-
+//************************ORDER ROUTE**************************************/
+const orderRoutes = require("./routes/orders");
+app.use("/orders", orderRoutes(db));
+//**********************************************************************/
 
 //************************INDEX ROUTE**************************************/
 app.get("/", (req, res) => {
@@ -65,9 +66,9 @@ app.get("/", (req, res) => {
 
 //*******DEMO ROUTE FOR CHECKOUT_ORDER PAGE *************/
 
-app.get('/checkout', (req,res) => {
-  res.render("order_checkout");
-})
+// app.get('/checkout', (req,res) => {
+//   res.render("order_checkout");
+// })
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

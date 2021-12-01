@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const {countSubTotal, countTax} = require('../utils/index')
+
 module.exports = (db) => {
 
   //**************************GET ROUTE***************************/
@@ -106,8 +107,8 @@ module.exports = (db) => {
         console.log('totalAmount', totalAmount);
 
         let orderVar = {orders, subTotal, tax, totalAmount};
-            res.render("order_checkout",orderVar);
-                  
+           let a=JSON.stringify(orderVar);
+           res.redirect(`/orders/${a}`);
           })
           .catch(err => {
             res
@@ -125,3 +126,5 @@ module.exports = (db) => {
 
   return router;
 };
+
+
