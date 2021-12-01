@@ -8,6 +8,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+/*
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -23,6 +24,7 @@ app.use(cookieSession({
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))  // override with POST having ?_method=DELETE
 
+*/
 
 // PG database client/connection setup
 const { Pool } = require("pg");
