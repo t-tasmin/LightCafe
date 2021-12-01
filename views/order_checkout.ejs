@@ -48,9 +48,15 @@
           </div>
         </div>
       </div>
-      <label for="telephone">Enter your phone number </label>
-      <input id= "telephone" type="tel" placeholder="e.g. 123-234-1234">
-      <button id= "name-form" class="btn" type="submit" >Checkout</button>
+      <form action="/orders" method="post">
+
+        <label for="telephone">Phone</label>
+        <input id= "telephone" name="telephone" type="tel" placeholder="Enter your phone number e.g. 123-234-1234">
+        <label for="cname"> Name </label>
+        <input id= "telephone" name="cname" type="text" placeholder="Enter your name e.g. Jane Doe">
+        <button id= "name-form" name="order" class="btn" type="submit" value="<%= JSON.stringify(orders) %>">Checkout</button>
+      </form>
+
     </section>
 
   </main>
