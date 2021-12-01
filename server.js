@@ -66,11 +66,12 @@ app.get("/", (req, res) => {
 });
 //**********************************************************************/
 
-//*******DEMO ROUTE FOR CHECKOUT_ORDER PAGE *************/
+//*********************ROUTE FOR LAST VIEW*********************/
 
-// app.get('/checkout', (req,res) => {
-//   res.render("order_checkout");
-// })
+ app.get('/last', (req,res) => {
+   const time = '1:30 PM'
+   res.render("last",{time});
+ })
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
