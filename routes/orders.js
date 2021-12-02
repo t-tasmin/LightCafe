@@ -118,15 +118,15 @@ module.exports = (db) => {
                   console.log('this insert3 =====>',data.rows); //`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===>++
 
                   let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
-                  let clientText_B = `Your order is ready! ${text}, Name: ${cname} , Phone: ${phone}. You can come for pickup. Enjoy it!`; // for checkout route
+
                   let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
-                  let r_phone = 9052135569; // restaurant phone number //--------------------- pending twilio fix
+                  let r_phone = +17653264402; // restaurant phone number //--------------------- pending twilio fix
                   sendSMS(phone, clientText_A);
                   sendSMS(r_phone, restaurantText);
                   console.log('-----------------------------------------------------------------------') //-------------------x
                   console.log('clientText_A ==>',clientText_A);
                   console.log('-----------------------------------------------------------------------')
-                  console.log('clientText_B ==>',clientText_B);
+                  // console.log('clientText_B ==>',clientText_B);
                   console.log('-----------------------------------------------------------------------')
                   console.log('restaurantText ==>',restaurantText)
                   console.log('-----------------------------------------------------------------------')

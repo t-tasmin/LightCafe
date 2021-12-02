@@ -30,17 +30,39 @@
       <% } %> -->
 
     <section class="order_queue">
-      <div class="card border-success mb-3" style="max-width: 18rem;">
-        <div class="card-header text-success">Order ID : ####</div>
-        <div class="card-body ">
-          <!-- <h5 class="card-title">Primary card title</h5> -->
-          <p class="card-text"><span>Butter Chicken :</span> <span>1</span></p>
-          <p class="card-text"><span>Goat Curry :</span> <span>2</span></p>
-          <p class="card-text"><span>Vegetable Salad :</span> <span>1</span></p>
-        </div>
-      </div>
 
-      <div class="card border-danger mb-3" style="max-width: 18rem;">
+
+      <form action="/restaurant" method="post">
+        <button class="btn-danger"  type="submit">Populate Orders</button>
+      </form>
+      <% if (typeof orderQueue === 'object') { %>
+        <% for (let item of orderQueue)  { %>
+          <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header text-success">Order ID : <%= item.id %></div>
+            <div class="card-body ">
+              <p class="card-text"><%= item.customer_phone %></p>
+              <p class="card-text"><%= item.customer_name %></p>
+              <!-- <h5 class="card-title">Primary card title</h5> -->
+              <% const itemArr = JSON.parse(JSON.parse(item.customer_order)[0].item_names); %>
+
+              <% const menuItemArr = JSON.parse(JSON.parse(item.customer_order)[0].menu_items); %>
+              <% for (let i = 0; i < itemArr.length; i++) {  %>
+
+                <p class="card-text"><span><%= itemArr[i] %></span> <span><%=  menuItemArr[i][1] %></span></p>
+              <% } %>
+
+             <form action="/finish" method="post">
+               <button type="submit" class="btn btn-success" name="order" value="<%= item.id %>">Finish</button>
+              </form>
+            </div>
+            <!-- <div>
+              <button type="submit" class="btn btn-success">Finish</button>
+            </div> -->
+          </div>
+          <% } %>
+      <% } %>
+
+      <!-- <div class="card border-danger mb-3" style="max-width: 18rem;">
         <div class="card-header">Header</div>
         <div class="card-body text-danger">
           <h5 class="card-title">Danger card title</h5>
@@ -53,7 +75,7 @@
           <h5 class="card-title">Warning card title</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
-      </div>
+      </div> -->
 
     </section>
   </main>

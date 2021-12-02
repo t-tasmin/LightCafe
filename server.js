@@ -74,6 +74,9 @@ app.use("/orders", orderRoutes(db));
 const restaurantRoutes = require("./routes/restaurant");
 app.use("/restaurant", restaurantRoutes(db));
 
+//************************restROUTE**************************************/
+const finishRoutes = require("./routes/finish");
+app.use("/finish", finishRoutes(db));
 
 
 //************************INDEX ROUTE**************************************/
