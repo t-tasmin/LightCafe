@@ -104,8 +104,8 @@ module.exports = (db) => {
         console.log('totalAmount', totalAmount);
 
         let orderVar = {orders, subTotal, tax, totalAmount};
-            // res.render("order_checkout",orderVar);
-            res.redirect("/checkout");
+            res.render("order_checkout",orderVar);
+
           })
           .catch(err => {
             res
