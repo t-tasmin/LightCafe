@@ -16,8 +16,6 @@ module.exports = (db) => {
         let cname = order.cname
         let orderf = JSON.parse(order.order);
 //--------------------------------------------------------------------------------------------------------------------------------
-        let clientText = '';
-        let restaurantText = '';
         let queue_timing = [];
         let order_items_ids = [];
         let order_items_names = [];
@@ -100,6 +98,8 @@ module.exports = (db) => {
               db.query(qstring2, templateVars2)
                 .then((data) => {
                   console.log('this insert3 =====>',data.rows); //`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===>++
+                  let clientText = '';
+                  let restaurantText = '';
                 })
                 .catch(err => {
                   console.log(err.message);
