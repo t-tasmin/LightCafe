@@ -1,14 +1,11 @@
 $primary_color : #BC7869;
 $secondary_color : #F5B57A;
 $price_color : rgb(86, 90, 93);
+@import 'breakpoints';
 body {
   height: 100vh;
   background:  linear-gradient(0deg, $secondary_color, $secondary_color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 4em;
-  nav{
-    font-size: 2em;
-  }
   main {
     background: linear-gradient(165.26deg, $primary_color 1.96%, rgba(234, 198, 196, 0) 80.75%);
     height: 100vh;
@@ -16,9 +13,15 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 6em;
-
+    font-size: 1rem;
+    @include md {
+      font-size: 1.3rem;
+    }
     form {
       width: 100%;
+      @include lg {
+        width: 50%;
+      }
     }
     .form_layout {
       display: flex;
@@ -29,7 +32,7 @@ body {
       .menu_items {
         width: 100%;
         .item {
-          margin: 2em;
+          margin: 1em;
           display: flex;
           justify-content: space-between;
           .item_name {
@@ -58,26 +61,12 @@ body {
         }
       }
       .btn{
-        font-size: 1.5em;
-        padding: 0.6em 0.6em;
+        margin-top: 1em;
+        font-size: 1.2em;
+        padding: 1em 5em;
       }
     }
   }
 
 }
 
-// @mixin theme($theme, $theme_color) {
-//   text-decoration: none;
-//   color: $theme_color;
-//   background: $theme;
-//   margin: 1em;
-//   padding: 24px 60px;
-//   font-size: 3rem;
-//   border-radius: 30px;
-//   border: none;
-//   box-shadow: 2px 2px 8px 3px $theme_color;
-// }
-
-// .btn {
-//   @include theme(#4F3939, white);
-// }
