@@ -1,45 +1,27 @@
 $primary_color : #BC7869;
 $secondary_color : #F5B57A;
 $price_color : rgb(86, 90, 93);
+@import 'breakpoints';
 body {
   height: 100vh;
   background:  linear-gradient(0deg, $secondary_color, $secondary_color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 36px;
-
-  nav{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    padding: 1em 2em;
-    .container_fluid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      a{
-        text-decoration: none;
-        i{
-          color:#4F3939;
-          font-size: 4rem;
-        }
-      }
-    }
-
-  }
-
   main {
     background: linear-gradient(165.26deg, $primary_color 1.96%, rgba(234, 198, 196, 0) 80.75%);
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 4em;
-
+    padding-top: 6em;
+    font-size: 1rem;
+    @include md {
+      font-size: 1.3rem;
+    }
     form {
-      margin-top: 3em;
       width: 100%;
+      @include lg {
+        width: 50%;
+      }
     }
     .form_layout {
       display: flex;
@@ -50,7 +32,7 @@ body {
       .menu_items {
         width: 100%;
         .item {
-          margin: 2em;
+          margin: 1em;
           display: flex;
           justify-content: space-between;
           .item_name {
@@ -59,12 +41,18 @@ body {
           .item_price {
             color: $price_color;
           }
+          input[type=checkbox] {
+            width : 0.8em;
+            height: 0.8em;
+            accent-color: #99b92e;
+          }
+
           input[type=number]::-webkit-inner-spin-button,
           input[type=number]::-webkit-outer-spin-button  {
             opacity: 1;
           }
           input[type = number] {
-            width: 100px;
+            width: 3em;
             border: none;
             border-radius: 10px;
             background: #e7d5c4;
@@ -72,30 +60,13 @@ body {
           }
         }
       }
-
+      .btn{
+        margin-top: 1em;
+        font-size: 1.2em;
+        padding: 1em 5em;
+      }
     }
   }
-  footer {
-    width: 100%;
-    text-align: center;
-    font-size: 1em;
-    color: #4d4a4a;
-    opacity: 0.5;
-  }
+
 }
 
-@mixin theme($theme, $theme_color) {
-  text-decoration: none;
-  color: $theme_color;
-  background: $theme;
-  margin: 1em;
-  padding: 24px 60px;
-  font-size: 3rem;
-  border-radius: 30px;
-  border: none;
-  box-shadow: 2px 2px 8px 3px $theme_color;
-}
-
-.btn {
-  @include theme(#4F3939, white);
-}

@@ -1,58 +1,39 @@
 $primary_color : #BC7869;
 $secondary_color : #F5B57A;
 $price_color : rgb(86, 90, 93);
-body {
-  height: 100vh;
-  background:  linear-gradient(0deg, $secondary_color, $secondary_color);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 36px;
+@import 'breakpoints';
 
-  nav{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    padding: 1em 2em;
-    .container_fluid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      a{
-        text-decoration: none;
-        i{
-          color:#4F3939;
-          font-size: 4rem;
-        }
-      }
-    }
-
-  }
-
-  main {
-    background: linear-gradient(165.26deg, $primary_color 1.96%, rgba(234, 198, 196, 0) 80.75%);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 4em;
-
+// main{
+//   @include md {
+//     padding-left: 10%;
+//     padding-right: 10%;
+//   }
+// }
     .final_order {
-      font-size: 3rem;
       padding: 1em;
       margin: 1em;
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 100vh;
+      @include lg {
+        font-size: 1.3rem;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+
       .order_reciept {
-        margin: 2em 0;
+        margin-bottom: 1em;
+        @include lg{
+          flex-grow: 2;
+          padding-right: 10px;
+        }
         .item {
           display: flex;
           justify-content: space-between;
         }
         .total_amount{
-          margin-top: 2em;
+          margin-top: 1em;
           border-top: 2px solid black;
           padding-top: 1em;
           .amount:last-of-type {
@@ -66,71 +47,31 @@ body {
           }
         }
       }
+      .customer_info {
+        @include lg {
+          flex-grow: 1;
+          margin-left: 10px;
+          padding-left: 20px;
+          border-left: 1px solid gray;
+          padding-bottom: 20px;
+        }
+        display: flex;
+        flex-direction: column;
+      }
       label {
-        margin: 20px 0;
-      }
-      input[type = tel] {
-        padding: 15px;
-        border: none;
-        border-radius: 20px;
-      }
-    }
-
-    .form_layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      justify-content: space-around;
-      .menu_items {
-        width: 100%;
-        .item {
-          margin: 2em;
-          display: flex;
-          justify-content: space-between;
-          .item_name {
-            margin: 0 1em;
-          }
-          .item_price {
-            color: $price_color;
-          }
-          input[type=number]::-webkit-inner-spin-button,
-          input[type=number]::-webkit-outer-spin-button  {
-            opacity: 1;
-          }
-          input[type = number] {
-            width: 100px;
-            border: none;
-            border-radius: 10px;
-            background: #e7d5c4;
-            outline: none;
-          }
+        margin: 10px 0;
+        align-self: flex-start;
+        @include md {
+          margin-top: 0;
         }
       }
-
+      input[type = tel],input[type = text] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 10px;
+      }
+      .btn {
+        margin-top: 10px;
+      }
     }
-  }
-  footer {
-    width: 100%;
-    text-align: center;
-    font-size: 1em;
-    color: #4d4a4a;
-    opacity: 0.5;
-  }
-}
-
-@mixin theme($theme, $theme_color) {
-  text-decoration: none;
-  color: $theme_color;
-  background: $theme;
-  margin: 1em;
-  padding: 24px 60px;
-  font-size: 3rem;
-  border-radius: 30px;
-  border: none;
-  box-shadow: 2px 2px 8px 3px $theme_color;
-}
-
-.btn {
-  @include theme(#4F3939, white);
-}

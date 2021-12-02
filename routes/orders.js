@@ -8,6 +8,15 @@ const { sendSMS } = require('../helpers')
 //--------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = (db) => {
+  
+ //**************************GET ROUTE***************************/
+ router.get("/:a", (req, res) => {
+  let orderVar = JSON.parse(req.params.a);
+  res.render("order_checkout", orderVar);
+  
+});
+
+//**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
 
     const order = req.body;

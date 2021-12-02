@@ -3,9 +3,11 @@
 
 <head>
   <title>Checkout Page</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
   <link rel="stylesheet" href="/styles/order_checkout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
@@ -29,35 +31,46 @@
 
     <section class="final_order">
       <div class="order_reciept">
-        <% for (let item in orders) { %>
-        <div class="item">
-          <span><%=orders[item].itemName%></span>
-          <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
-          <span>$<%=orders[item].totalPrice%></span>
-        </div>
-        <% } %>
-         <div class="total_amount">
-          <div class="amount">
-            <span>Sub Total</span> <span> <%= subTotal %> </span>
-          </div>
-          <div class="amount">
-            <span>Tax</span> <span> <%= tax %> </span>
-          </div>
-          <div class="amount">
-             <span>Total</span> <span><%= totalAmount %></span>
-          </div>
-        </div>
+            <h5>Order Reciept</h5>
+          <% for (let item in orders) { %>
+            <div class="item">
+              <span><%=orders[item].itemName%></span>
+              <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
+              <span>$<%=orders[item].totalPrice%></span>
+            </div>
+            <% } %>
+            <div class="total_amount">
+              <div class="amount">
+                <span>Sub Total</span> <span> <%= subTotal %> </span>
+              </div>
+              <div class="amount">
+                <span>Tax</span> <span> <%= tax %> </span>
+              </div>
+              <div class="amount">
+                 <span>Total</span> <span><%= totalAmount %></span>
+              </div>
+            </div>
+            <!-- <label for="telephone">Enter your phone number </label>
+            <input id= "telephone" type="tel" name='telephone' placeholder="e.g. 123-234-1234">
+            <button  class="btn" type="submit" >Checkout</button> -->
+
       </div>
       <form action="/orders" method="post">
-        <label for="telephone">Phone</label>
-        <input id= "telephone" name="telephone" type="tel" placeholder="Enter your phone number e.g. 123-234-1234">
-        <label for="cname"> Name </label>
-        <input id= "telephone" name="cname" type="text" placeholder="Enter your name e.g. Jane Doe">
-        <button id= "name-form" name="order" class="btn" type="submit" value="<%= JSON.stringify(orders) %>">Checkout</button>
+        <div class="customer_info">
+            <h5> Customer Info</h5>
+            <label for="telephone">Enter Your Phone : </label>
+            <input id= "telephone" name="telephone" type="tel" placeholder="format 123-234-1234">
+
+            <label for="cname"> Enter Your Name : </label>
+            <input id= "cname" name="cname" type="text" placeholder="Your Name">
+
+
+          <button id= "name-form" name="order" class="btn" type="submit" value="<%= JSON.stringify(orders) %>">Checkout</button>
+        </div>
+
       </form>
 
     </section>
-
   </main>
 
   <footer>
