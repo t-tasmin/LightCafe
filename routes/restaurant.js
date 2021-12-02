@@ -25,7 +25,7 @@ module.exports = (db) => {
         .then((data) => {
           if(data.rows.length !== 0) {
             const orderQueue = data.rows;
-            res.render('restaurant', {orderQueue});
+            return res.render('restaurant', {orderQueue});
           } else {
             clearInterval(id);
           }
