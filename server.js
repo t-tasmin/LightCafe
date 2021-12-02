@@ -24,6 +24,7 @@ const morgan = require("morgan");
 // app.use(methodOverride('_method'))  // override with POST having ?_method=DELETE
 
 
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -54,9 +55,10 @@ const menuRoutes = require("./routes/menus");
 app.use("/menus", menuRoutes(db));
 //**********************************************************************/
 
-const orderRoutes = require('./routes/orders');
-app.use('/orders', orderRoutes(db));
-
+//************************ORDER ROUTE**************************************/
+const orderRoutes = require("./routes/orders");
+app.use("/orders", orderRoutes(db));
+//**********************************************************************/
 
 //************************INDEX ROUTE**************************************/
 app.get("/", (req, res) => {
@@ -65,11 +67,17 @@ app.get("/", (req, res) => {
 //**********************************************************************/
 
 //*******DEMO ROUTE FOR CHECKOUT_ORDER PAGE *************/
-const checkoutRoutes = require("./routes/demo");
-app.use("/checkout", checkoutRoutes(db));
+// const checkoutRoutes = require("./routes/demo");
+// app.use("/checkout", checkoutRoutes(db));
 // app.get('/checkout', (req,res) => {
 //   res.render("order_checkout");
 // })
+//*********************ROUTE FOR LAST VIEW*********************/
+
+ app.get('/last', (req,res) => {
+   const time = '1:30 PM'
+   res.render("last",{time});
+ })
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

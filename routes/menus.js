@@ -35,8 +35,11 @@ module.exports = (db) => {
 
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
-    // console.log("###ITEMS",numberOfItems); //-------------------------------------x
     numberOfItems = numberOfItems.filter((a) => a);
+
+    if (typeof itemNames === 'string'){
+      itemNames = [itemNames];
+    }
 
     //Query to update number_available for each menu_dishes
     let queryString1 = `UPDATE menu_dishes SET number_available = CASE `;
@@ -58,7 +61,7 @@ module.exports = (db) => {
 
     db.query(queryString1)
       .then(data => {
-        // console.log(data.rows); // Display which items are updated //-------------------------------x
+         console.log("QUERYY",data.rows); // Display which items are updated //-------------------------------x
 
         //Query to select unit prices for each selected menu_dishes
         let queryString2 = `
@@ -99,13 +102,15 @@ module.exports = (db) => {
         //Total bill
         let totalAmount = rounded(subTotal + tax);
 
-        console.log('subTotal', subTotal);
-        console.log('tax', tax);
-        console.log('totalAmount', totalAmount);
+        //console.log('subTotal', subTotal);
+        //console.log('tax', tax);
+        //console.log('totalAmount', totalAmount);
 
         let orderVar = {orders, subTotal, tax, totalAmount};
-            res.render("order_checkout",orderVar);
+            // res.render("order_checkout",orderVar);
 
+           let a=JSON.stringify(orderVar);
+           res.redirect(`/orders/${a}`);
           })
           .catch(err => {
             res
@@ -123,3 +128,5 @@ module.exports = (db) => {
 
   return router;
 };
+
+
