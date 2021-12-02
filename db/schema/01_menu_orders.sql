@@ -39,7 +39,7 @@ CREATE TABLE orders (
 CREATE TABLE queue (
   id SERIAL PRIMARY KEY NOT NULL,
   customer_phone VARCHAR(255) NOT NULL,
-  customer_name VARCHAR(255) NOT NULL,
-  customer_order VARCHAR(255) NOT NULL,
+  customer_name TEXT NOT NULL,
+  customer_order TEXT NOT NULL,
   est_pickup_time TIMESTAMP NOT NULL
 );

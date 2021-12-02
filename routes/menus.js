@@ -8,9 +8,10 @@
 const express = require('express');
 const router  = express.Router();
 const {countSubTotal, countTax} = require('../utils/index')
+
 module.exports = (db) => {
 
-  //**************************GET ROUTE***************************/
+//**************************GET ROUTE***************************/
   router.get("/", (req, res) => {
     const queryString = `
     SELECT *
