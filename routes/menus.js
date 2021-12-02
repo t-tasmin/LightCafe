@@ -34,8 +34,6 @@ module.exports = (db) => {
  //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
 
-    console.log('this order ====>',req.body); //===================x
-
     let itemNames = req.body.itemName;
     let numberOfItems = req.body.numberOfItems;
     // console.log("###ITEMS",numberOfItems); //-------------------------------------x

@@ -26,7 +26,6 @@ module.exports = (db) => {
 
         for (let j of orderf) {
           let qstring0 =`SELECT * FROM menu_dishes WHERE name = $1 ;`;
-          
           db.query(qstring0, [j.itemName])
             .then((data) => {
               order_items_info.push(data.rows[0]);
