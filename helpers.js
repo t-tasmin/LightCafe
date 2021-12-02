@@ -1,8 +1,10 @@
+const { ModelBuildPage } = require("twilio/lib/rest/autopilot/v1/assistant/modelBuild");
+
 // This function will send a SMS to the given phone number using twillo
 require("dotenv").config();
 
 
-const sendSMS = function (phone_number, message){
+const sendSMS = (phone_number, message) => {
 
   let twilio = require('twilio');
 
@@ -18,4 +20,6 @@ const sendSMS = function (phone_number, message){
 
 };
 
-sendSMS('9052135569', 'Your order is ready');
+// sendSMS('9052135569', 'Your order is ready'); //-------------------------------x
+
+module.exports = { sendSMS };
