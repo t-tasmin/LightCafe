@@ -1,4 +1,5 @@
 const express = require('express');
+const { max } = require('pg/lib/defaults');
 const router  = express.Router();
 
 module.exports = (db) => {
@@ -18,7 +19,7 @@ module.exports = (db) => {
 
         let clientText = '';
         let restaurantText = '';
-
+        let queue_timing = [0.001];
         let order_items_ids = [];
         let order_items_names = [];
 
@@ -39,12 +40,12 @@ module.exports = (db) => {
 
         setTimeout(() => {
           let gttl = 0;
-          let ttl_prep_time = 0;
+          let ttl_prep_time = [];
 
           for (let i = 0; i < orderf.length; i++ ) {
              let ph = [];
              gttl += orderf[i].totalPrice;
-             ttl_prep_time += order_items_info[i].prep_time;
+             ttl_prep_time.push(order_items_info[i].prep_time);
              ph.push(order_items_info[i].id);
              ph.push(orderf[i].numberOfItem);
              ph.push(order_items_info[i].unit_price);
@@ -53,6 +54,12 @@ module.exports = (db) => {
              order_items_names.push(order_items_info[i].name);
           }
 
+          let est_pickup_time = 0;
+          if (queue_timing.length !== 0) {
+            est_pickup_time = new Date(Date.now() + ((max(ttl_prep_time) + queue_timing[queue_timing.length - 1])*60000));
+          } else {
+            est_pickup_time = new Date(Date.now() + (max(ttl_prep_time)*60000));
+          }
           // console.log('these items =====> ',order_items_ids); //============================x
           // console.log('these order =====> ',order_items_names);
 
@@ -67,7 +74,7 @@ module.exports = (db) => {
           )
           VALUES
           ($1 , $2 , $3, $4 , $5, $6, $7) RETURNING *;`;
-          let templateVars1 = [`${order_items_ids}`, `${order_items_names}`, cname, phone, gttl, new Date(Date.now()), new Date(Date.now() + (ttl_prep_time*60000))];
+          let templateVars1 = [order_items_ids, `${order_items_names}`, cname, phone, gttl, new Date(Date.now()), est_pickup_time];
           db.query(qstring1, templateVars1)
             .then((data) => {
               console.log(data.rows); //=================================================x
@@ -78,7 +85,7 @@ module.exports = (db) => {
                 est_pickup_time
               )
               VALUES ($1, $2, $3, $4) RETURNING *;`;
-              let templateVars2 = [phone, cname, `${data.rows}`, new Date(Date.now() + (ttl_prep_time*60000))];
+              let templateVars2 = [phone, cname, JSON.stringify(data.rows), est_pickup_time ];
               db.query(qstring2, templateVars2)
                 .then((data) => {
                   console.log(data.rows); //`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~++
