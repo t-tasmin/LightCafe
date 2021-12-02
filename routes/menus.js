@@ -58,7 +58,7 @@ module.exports = (db) => {
         queryParams.push(`${itemNames[i]}`);
         queryString += `$${queryParams.length}, `;
       }
-    }  
+    }
 
     
     
@@ -79,39 +79,40 @@ module.exports = (db) => {
         console.log(noOfItemsAvailable);
         console.log(noOfItemsOrdered);
 
-        let errorMessage="";
-        let error =false;
-        for (let i in noOfItemsAvailable){
-          if (noOfItemsOrdered[i] > noOfItemsAvailable[i]){
-            errorMessage+=`Sorry, You ordered for ${noOfItemsOrdered[i]} of ${itemNames[i]},\n We have only ${noOfItemsAvailable[i]} left`;
+        let errorMessage = "";
+        let error = false;
+        for (let i in noOfItemsAvailable) {
+          if (noOfItemsOrdered[i] > noOfItemsAvailable[i]) {
+            error = true;
+            errorMessage += `Sorry, You ordered for ${noOfItemsOrdered[i]} of ${itemNames[i]},\n We have only ${noOfItemsAvailable[i]} left`;
           }
         }
- 
-        let orders  = [];
-        for (let index in itemNames) {
-          orders[index] = {
-            itemName: itemNames[index],
-            unitPrice: unitPrices[index],
-            numberOfItem: noOfItemsOrdered[index] ,
-            totalPrice: noOfItemsOrdered[index] * unitPrices[index]
-          };
+        if (error) {
+          console.log(errorMessage);
+          res.render("last",{errorMessage});
+        } else {
+          let orders  = [];
+          for (let index in itemNames) {
+            orders[index] = {
+              itemName: itemNames[index],
+              unitPrice: unitPrices[index],
+              numberOfItem: noOfItemsOrdered[index] ,
+              totalPrice: noOfItemsOrdered[index] * unitPrices[index]
+            };
+          }
+
+          // console.log(orders); //-----------------------------------------------x
+          //subTotal
+          let subTotal = countSubTotal(orders);
+          //tax calculation
+          let tax = countTax(subTotal)();
+          //Total bill
+          let totalAmount = rounded(subTotal + tax);
+
+          let orderVar = {orders, subTotal, tax, totalAmount};
+          let a = JSON.stringify(orderVar);
+          res.redirect(`/orders/${a}`);
         }
-
-        // console.log(orders); //-----------------------------------------------x
-        //subTotal
-        let subTotal = countSubTotal(orders);
-        //tax calculation
-        let tax = countTax(subTotal)();
-        //Total bill
-        let totalAmount = rounded(subTotal + tax);
-
-        //console.log('subTotal', subTotal);
-        //console.log('tax', tax);
-        //console.log('totalAmount', totalAmount);
-
-        let orderVar = {orders, subTotal, tax, totalAmount};
-        let a = JSON.stringify(orderVar);
-        res.redirect(`/orders/${a}`);
       })
       .catch(err => {
         res
