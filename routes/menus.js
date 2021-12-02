@@ -7,11 +7,10 @@
 
 const express = require('express');
 const router  = express.Router();
-const {countSubTotal, countTax} = require('../utils/index')
-
+const {countSubTotal, countTax, rounded} = require('../utils/index');
 module.exports = (db) => {
 
-//**************************GET ROUTE***************************/
+  //**************************GET ROUTE***************************/
   router.get("/", (req, res) => {
     const queryString = `
     SELECT *
@@ -31,54 +30,89 @@ module.exports = (db) => {
       });
   });
 
- //**************************POST ROUTE***************************/
+  //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
 
     let itemNames = req.body.itemName;
-    let numberOfItems = req.body.numberOfItems;
-    numberOfItems = numberOfItems.filter((a) => a);
+    let noOfItemsOrdered = req.body.numberOfItems;
+    noOfItemsOrdered = noOfItemsOrdered.filter((a) => a);
+
+    if (typeof itemNames === 'string') {
+      itemNames = [itemNames];
+    }
 
     //Query to select unit prices for each selected menu_dishes
-    let queryString2 = `
-    SELECT unit_price
+    let queryString = `
+    SELECT number_available, unit_price
     FROM menu_dishes
-    WHERE name in ( 
+    WHERE name in (
     `;
+
+    const queryParams = [];
+
     for (let i = 0; i < itemNames.length; i++) {
       if (i === itemNames.length - 1) {
-        queryString2 += `'${itemNames[i]}');`;
+        queryParams.push(`${itemNames[i]}`);
+        queryString += `$${queryParams.length});`;
       } else {
-        queryString2 += `'${itemNames[i]}', `;
+        queryParams.push(`${itemNames[i]}`);
+        queryString += `$${queryParams.length}, `;
       }
     }
 
-    db.query(queryString2)
+    
+    
+    db.query(queryString, queryParams)
+
       .then(data => {
-        const unitPriceObj = data.rows;
-        let unitPrices = unitPriceObj.map(function(element) {
+        
+        const menuArray = data.rows;
+        let unitPrices = menuArray.map(function(element) {
           return element.unit_price;
         });
-    
-        let orders  = [];
-        for (let index in itemNames) {
-          orders[index] = {
-            itemName: itemNames[index],
-            unitPrice: unitPrices[index],
-            numberOfItem: numberOfItems[index] ,
-            totalPrice: numberOfItems[index] * unitPrices[index]
-          };
+
+        let noOfItemsAvailable = menuArray.map(function(element) {
+          return element.number_available;
+        });
+
+        console.log(unitPrices);
+        console.log(noOfItemsAvailable);
+        console.log(noOfItemsOrdered);
+
+        let errorMessage = "";
+        let error = false;
+        for (let i in noOfItemsAvailable) {
+          if (noOfItemsOrdered[i] > noOfItemsAvailable[i]) {
+            error = true;
+            errorMessage += `Sorry, You ordered for ${noOfItemsOrdered[i]} of ${itemNames[i]},\n We have only ${noOfItemsAvailable[i]} left`;
+          }
         }
+        if (error) {
+          console.log(errorMessage);
+          res.render("last",{errorMessage});
+        } else {
+          let orders  = [];
+          for (let index in itemNames) {
+            orders[index] = {
+              itemName: itemNames[index],
+              unitPrice: unitPrices[index],
+              numberOfItem: noOfItemsOrdered[index] ,
+              totalPrice: noOfItemsOrdered[index] * unitPrices[index]
+            };
+          }
 
-        //subTotal
-    let subTotal = countSubTotal(orders);
-    //tax calculation
-    let tax = countTax(subTotal)();
-    //Total bill
-    let totalAmount = subTotal + tax;
+          // console.log(orders); //-----------------------------------------------x
+          //subTotal
+          let subTotal = countSubTotal(orders);
+          //tax calculation
+          let tax = countTax(subTotal)();
+          //Total bill
+          let totalAmount = rounded(subTotal + tax);
 
-    let orderVar = {orders, subTotal, tax, totalAmount};
-        res.render("order_checkout",orderVar);
-              
+          let orderVar = {orders, subTotal, tax, totalAmount};
+          let a = JSON.stringify(orderVar);
+          res.redirect(`/orders/${a}`);
+        }
       })
       .catch(err => {
         res
@@ -86,8 +120,9 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
     
-  });
-
-
+  });//End of Post route
+    
   return router;
 };
+
+
