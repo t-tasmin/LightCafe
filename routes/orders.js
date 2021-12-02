@@ -4,9 +4,7 @@ const { max } = require('pg/lib/defaults');
 const router  = express.Router();
 
 //--------------------------------------------------------------------------------------------------------------------------------
-// const { ModelBuildPage } = require("twilio/lib/rest/autopilot/v1/assistant/modelBuild"); // -------------- FIX TWILIO
-// require("dotenv").config();
-// const { sendSMS } = require('../helpers')
+const { sendSMS } = require('../helpers')
 //--------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = (db) => {
@@ -113,9 +111,9 @@ module.exports = (db) => {
                   let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
                   let clientText_B = `Your order is ready! ${text}, Name: ${cname} , Phone: ${phone}. You can come for pickup. Enjoy it!`; // for checkout route
                   let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
-                  // let r_phone = 0123456789; // restaurant phone number //--------------------- pending twilio fix
-                  // sendSMS(phone, clientText);
-                  // sendSMS(r_phone, restaurantText);
+                  let r_phone = 9052135569; // restaurant phone number //--------------------- pending twilio fix
+                  sendSMS(phone, clientText_A);
+                  sendSMS(r_phone, restaurantText);
                   console.log('-----------------------------------------------------------------------') //-------------------x
                   console.log('clientText_A ==>',clientText_A); 
                   console.log('-----------------------------------------------------------------------')

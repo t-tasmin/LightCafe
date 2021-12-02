@@ -20,6 +20,6 @@ const sendSMS = (phone_number, message) => {
 
 };
 
-sendSMS('9052135569', 'Your order is ready');
+// sendSMS('9052135569', 'Your order is ready'); //-------------------------------x
 
 module.exports = { sendSMS };
