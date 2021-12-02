@@ -100,9 +100,9 @@ module.exports = (db) => {
         //Total bill
         let totalAmount = subTotal + tax;
 
-        console.log('subTotal', subTotal);
-        console.log('tax', tax);
-        console.log('totalAmount', totalAmount);
+        // console.log('subTotal', subTotal); //-------------------------------------x
+        // console.log('tax', tax);
+        // console.log('totalAmount', totalAmount);
 
         let orderVar = {orders, subTotal, tax, totalAmount};
             res.render("order_checkout",orderVar);

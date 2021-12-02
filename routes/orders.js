@@ -1,6 +1,13 @@
 const express = require('express');
 const { max } = require('pg/lib/defaults');
+
 const router  = express.Router();
+
+//--------------------------------------------------------------------------------------------------------------------------------
+// const { ModelBuildPage } = require("twilio/lib/rest/autopilot/v1/assistant/modelBuild");
+// require("dotenv").config();
+// const { sendSMS } = require('../helpers')
+//--------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
@@ -15,6 +22,7 @@ module.exports = (db) => {
         let phone = order.telephone;
         let cname = order.cname
         let orderf = JSON.parse(order.order);
+        console.log(orderf); //----------------------------------------------x
 //--------------------------------------------------------------------------------------------------------------------------------
         let queue_timing = [];
         let order_items_ids = [];
@@ -52,6 +60,7 @@ module.exports = (db) => {
 //--------------------------------------------------------------------------------------------------------------------------------
           let gttl = 0;
           let ttl_prep_time = [];
+          let text = [];
           for (let i = 0; i < orderf.length; i++ ) {
              let ph = [];
              gttl += orderf[i].totalPrice;
@@ -60,9 +69,11 @@ module.exports = (db) => {
              ph.push(orderf[i].numberOfItem);
              ph.push(order_items_info[i].unit_price);
              order_items_ids.push(ph)
+             text.push(`[${orderf[i].itemName}-($${orderf[i].unitPrice}) -- ${orderf[i].numberOfItem} -- $${orderf[i].totalPrice}]`)
              ph = [];
              order_items_names.push(order_items_info[i].name);
           }
+          text.push(`SUBTOTAL = $${gttl}, Tax = 13%, GRAND TOTAL = $${gttl + (gttl*0.13)}`);
 //--------------------------------------------------------------------------------------------------------------------------------
           let est_pickup_time = 0;
           if (queue_timing.length !== 0) {
@@ -94,12 +105,24 @@ module.exports = (db) => {
                 est_pickup_time
               )
               VALUES ($1, $2, $3, $4) RETURNING *;`;
-              let templateVars2 = [phone, cname, JSON.stringify(data.rows), est_pickup_time ];
+              let templateVars2 = [ phone, cname, JSON.stringify(data.rows), est_pickup_time ];
               db.query(qstring2, templateVars2)
                 .then((data) => {
                   console.log('this insert3 =====>',data.rows); //`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===>++
-                  let clientText = '';
-                  let restaurantText = '';
+
+                  let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
+                  let clientText_B = `Your order is ready! ${text}, Name: ${cname} , Phone: ${phone}. You can come for pickup. Enjoy it!`; // for checkout route
+                  let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
+                  // let r_phone = 0123456789; // restaurant phone number
+                  // sendSMS(phone, clientText);
+                  // sendSMS(r_phone, restaurantText);
+                  console.log('-----------------------------------------------------------------------') //-------------------x
+                  console.log('clientText_A ==>',clientText_A); 
+                  console.log('-----------------------------------------------------------------------')
+                  console.log('clientText_B ==>',clientText_B);
+                  console.log('-----------------------------------------------------------------------')
+                  console.log('restaurantText ==>',restaurantText)
+                  console.log('-----------------------------------------------------------------------')
                 })
                 .catch(err => {
                   console.log(err.message);
