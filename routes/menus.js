@@ -79,17 +79,17 @@ module.exports = (db) => {
         console.log(noOfItemsAvailable);
         console.log(noOfItemsOrdered);
 
-        let errorMessage = "";
+        let message = "Sorry ";
         let error = false;
         for (let i in noOfItemsAvailable) {
           if (noOfItemsOrdered[i] > noOfItemsAvailable[i]) {
             error = true;
-            errorMessage += `Sorry, You ordered for ${noOfItemsOrdered[i]} of ${itemNames[i]},\n We have only ${noOfItemsAvailable[i]} left`;
+            message += `You ordered for ${noOfItemsOrdered[i]} of ${itemNames[i]},\n We have only ${noOfItemsAvailable[i]} left\n\n`;
           }
         }
         if (error) {
-          console.log(errorMessage);
-          res.render("last",{errorMessage});
+          console.log(message);
+          res.render("error",{message});
         } else {
           let orders  = [];
           for (let index in itemNames) {
