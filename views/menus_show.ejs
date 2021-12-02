@@ -41,8 +41,11 @@
         <div class="menu_items">
           <% for (let item of menus) { %>
                 <div class="item">
-                  <input id="<%= item.name.split(' ').join('') %>1" type="checkbox" name="itemName" value="<%= item.name %>">
-                  <label for="<%= item.name %>"><%= item.name + "  " + '$' + item.unit_price %></label>
+                  <label for="<%= item.name %>">
+                    <input id="<%= item.name.split(' ').join('') %>1" type="checkbox" name="itemName" value="<%= item.name %>">
+                    <span class="item_name"> <%= item.name %> </span>
+                    <span class="item_price">$<%= item.unit_price %> </span>
+                  </label>
                   <input id="<%= item.name.split(' ').join('') %>2" type="number" name="numberOfItems" min="1" max="<%= item.number_available %>">
                 </div>
 

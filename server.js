@@ -48,6 +48,15 @@ app.use(
   })
 );
 
+/**
+ * Using Middleware to send data to restaurant
+ */
+
+
+
+
+
+
 app.use(express.static("public"));
 
 //************************MENU ROUTE**************************************/
@@ -59,6 +68,13 @@ app.use("/menus", menuRoutes(db));
 const orderRoutes = require("./routes/orders");
 app.use("/orders", orderRoutes(db));
 //**********************************************************************/
+
+
+//************************restROUTE**************************************/
+const restaurantRoutes = require("./routes/restaurant");
+app.use("/restaurant", restaurantRoutes(db));
+
+
 
 //************************INDEX ROUTE**************************************/
 app.get("/", (req, res) => {
@@ -77,6 +93,12 @@ app.get("/", (req, res) => {
  app.get('/last', (req,res) => {
    const time = '1:30 PM'
    res.render("last",{time});
+ });
+
+ //***********ROUTE FOR RESTAURANT**************/
+
+ app.get('/restaurant', (req,res) => {
+   res.render('restaurant')
  })
 
 app.listen(PORT, () => {
