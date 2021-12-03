@@ -14,12 +14,12 @@ const sendSMS = (phone_number, message) => {
   // Send the text message.
   client.messages.create({
     to: phone_number,
-    from: '+17653264402', // change to your twilio number
+    from: '+12058556664', // change to your twilio number
     body: message
   });
 
 };
 
-// sendSMS('9052135569', 'Your order is ready'); //-------------------------------x
+//sendSMS('9052135569', 'Your order is ready'); //-------------------------------x
 
 module.exports = { sendSMS };

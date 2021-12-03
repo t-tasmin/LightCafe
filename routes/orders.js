@@ -118,7 +118,6 @@ module.exports = (db) => {
                   console.log('this insert3 =====>',data.rows); //`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~===>++
 
                   let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
-
                   let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
                   let r_phone = 6477461021; // restaurant phone number //--------------------- pending twilio fix
                   sendSMS(phone, clientText_A);
