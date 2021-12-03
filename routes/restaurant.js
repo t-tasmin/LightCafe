@@ -19,21 +19,24 @@ module.exports = (db) => {
     console.log("populating Queue -------------->", req.body);
     console.log("**********************");
 
-  let id = setInterval(() => {
-      let queryString = `SELECT * FROM queue;`
-      db.query(queryString)
-        .then((data) => {
-          if(data.rows.length !== 0) {
-            const orderQueue = data.rows;
-            return res.render('restaurant', {orderQueue});
-          } else {
-            clearInterval(id);
-          }
-        })
-        .catch((err) => {
-          console.log("Error:", err.message);
-        })
-    }, 500)
+  // let id = setInterval(() => {
+  //
+
+  //   } , 500);
+
+  let queryString = `SELECT * FROM queue;`
+    db.query(queryString)
+    .then((data) => {
+      if(data.rows.length !== 0) {
+        const orderQueue = data.rows;
+        return res.render('restaurant', {orderQueue});
+      } else {
+        clearInterval(id);
+      }
+    })
+    .catch((err) => {
+      console.log("Error:", err.message);
+    })
 
   })
   return router;
