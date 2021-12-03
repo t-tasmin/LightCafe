@@ -35,30 +35,42 @@
       <form action="/restaurant" method="post">
         <button class="btn-danger"  type="submit">Populate Orders</button>
       </form>
-      <% if (typeof orderQueue === 'object') { %>
-        <% for (let item of orderQueue)  { %>
-          <div class="card border-success mb-3" style="max-width: 18rem;">
-            <div class="card-header text-success">Order ID : <%= item.id %></div>
-            <div class="card-body ">
-              <p class="card-text"><%= item.customer_phone %></p>
-              <p class="card-text"><%= item.customer_name %></p>
 
-              <% const itemArr = JSON.parse(JSON.parse(item.customer_order)[0].item_names); %>
+      <div class="orders">
+        <div class="container">
+          <div class="row">
+            <% if (typeof orderQueue === 'object') { %>
+              <% for (let item of orderQueue)  { %>
+                <div class="col">
+                  <div class="card border-success order mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-success">Order ID : <%= item.id %></div>
+                    <div class="card-body ">
+                      <p class="card-text fs-6 fst-italic">  <%= item.customer_name %> : <%= item.customer_phone %></p>
 
-              <% const menuItemArr = JSON.parse(JSON.parse(item.customer_order)[0].menu_items); %>
-              <% for (let i = 0; i < itemArr.length; i++) {  %>
+                      <% const itemArr = JSON.parse(JSON.parse(item.customer_order)[0].item_names); %>
 
-                <p class="card-text"><span><%= itemArr[i] %></span> <span><%=  menuItemArr[i][1] %></span></p>
-              <% } %>
+                      <% const menuItemArr = JSON.parse(JSON.parse(item.customer_order)[0].menu_items); %>
+                      <% for (let i = 0; i < itemArr.length; i++) {  %>
 
-             <form action="/finish" method="post">
-               <button type="submit" class="btn btn-success" name="order" value="<%= item.id %>">Finish</button>
-              </form>
-            </div>
+                        <p class="card-text"><span><%= itemArr[i] %></span> <span><%=  menuItemArr[i][1] %></span></p>
+                      <% } %>
+
+                     <form action="/finish" method="post">
+                       <button type="submit" class="btn btn-success" name="order" value="<%= item.id %>">Finish</button>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+
+                <% } %>
+            <% } %>
 
           </div>
-          <% } %>
-      <% } %>
+        </div>
+
+      </div>
+
 
     </section>
   </main>

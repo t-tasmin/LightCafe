@@ -1,3 +1,20 @@
 .order_queue {
   display: flex;
+  flex-direction: column;
+  // .orders {
+  //   display: flex;
+  //   flex-direction: column;
+  //   .order{
+  //     margin : 10px;
+  //   }
+  // }
+
+  .order{
+    margin : 10px;
+  }
+
 }
+
+// .footer{
+//   position: relative;
+// }
