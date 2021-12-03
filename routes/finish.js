@@ -36,7 +36,7 @@ module.exports = (db) => {
               let clientText_B = `Your order is ready! ${text}, Name: ${cname} , Phone: ${phone}. You can come for pickup. Enjoy it!`;
 
               // SEND message to customer
-              // sendSMS(phone, clientText_B);
+              sendSMS(phone, clientText_B);
 
               // DELETE the order from the queue
               const query_for_delete = `DELETE FROM queue WHERE  id = $1;`;
