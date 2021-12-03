@@ -120,7 +120,7 @@ module.exports = (db) => {
                   let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
 
                   let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
-                  let r_phone = +17653264402; // restaurant phone number //--------------------- pending twilio fix
+                  let r_phone = 6477461021; // restaurant phone number //--------------------- pending twilio fix
                   sendSMS(phone, clientText_A);
                   sendSMS(r_phone, restaurantText);
                   console.log('-----------------------------------------------------------------------') //-------------------x
