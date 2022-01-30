@@ -1,23 +1,14 @@
--- Drop and recreate Users table (Example)
-
--- DROP TABLE IF EXISTS users CASCADE;
--- CREATE TABLE users (
---   id SERIAL PRIMARY KEY NOT NULL,
---   name VARCHAR(255) NOT NULL
--- );
-
-
-DROP DATABASE IF EXISTS midterm;
-
-CREATE DATABASE midterm;
-\c midterm
+-- DROP DATABASE IF EXISTS midterm;
+-- CREATE DATABASE midterm;
 
 DROP TABLE IF EXISTS menu_dishes CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS queue CASCADE;
 
 CREATE TABLE menu_dishes (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
+  picture TEXT NOT NULL,
   unit_price INTEGER NOT NULL, -- price in cents
   number_available INTEGER NOT NULL, -- number of dishes available
   prep_time INTEGER NOT NULL,
