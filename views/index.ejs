@@ -14,29 +14,82 @@
 </head>
 
 <body>
+
   <% if (typeof script === 'string') {%>
     <div id='err_msg'>
       <%= script %>
     </div>
-    <% } %>
-  <header>
-    <nav class="nav_bar">
-      <div class="container_fluid">
-        <a href="/" class="logo"><i class="fas fa-utensils"></i></a>
-        <a href="/checkout"><i class="fas fa-shopping-cart"></i></a>
+  <% } %>
+  
+  <nav>
+    <div class="content-left">
+      <img src="/images/logo.png" class="logo" />
+        <a href="/" class="nav-link">
+          <div class="title">
+            <span><i>Veggie</i></span>
+            <span><i>D'Light</i></span>
+          </div>
+        </a>  
+    </div>
+    <div class="content-right">
+        <a href="http://localhost:8080/menus">
+          <button type="button" class="btn-dark" data-mdb-ripple-color="dark">
+            <span>Menus</span>
+          </button>
+        </a>
+    </div>
+  </nav>
+
+  <div class="fullscreen">
+  </div>
+
+  <video loop muted autoplay ="" class="fullscreen-video">
+    <source src="/videos/Home.mp4" type="video/mp4"/>
+  </video>
+
+  
+  <div class="main-content">
+    <div class="about-us-container">
+      <div class="about-us-text">
+         <h2> About Us!</h2>
+         <p>
+          Located in the core of South Oshawa, Veggie D'Light will surprise your 
+          taste buds and make you rethink food as you know it. We know how busy you are.
+          To ensure that you take good care of your body, we offer
+          healthy mindful plant-based meals that you can get fresh in-store. Our meals 
+          are designed to help you maintain a healthy weight, reduce inflammation, 
+          and promote gut health. We offer many gluten free and nut free options.
+          We make mindful desserts in-house that are mostly gluten free, oil free,
+          and refined-sugar free. 
+        </p>
       </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hungry_button">
-      <a class="btn" href="http://localhost:8080/menus"> Feeling Hungry?</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>All copyrights reserved</p>
-  </footer>
+    </div>
+    
+    <div class="contact-us-container">
+      <div class="contact-us-text">
+        <h3>Contact Us</h3>
+        <p>
+          info@VeggieD'Light.com<br />
+          906.456.1234 <br />
+        </p>
+        <div>
+          <h5>Hours</h5>
+          <p>9 AM – 10 PM daily</p>
+        </div>
+        <div>
+          <h5>Location</h5>
+          <p>
+            Oshawa Center<br />
+            Ground Floor<br />
+            19 King St W<br />
+            Oshawa, ON L1J 2K5
+          </p>
+        </div>
+      </div>
+      <img class="contact-us-image" src="/images/restaurant.jpg" />
+    
+    </div>
+    <footer><span>© 2022 by Veggie D'Light. All rights reserved.</span></footer>
 </body>
 
 </html>
