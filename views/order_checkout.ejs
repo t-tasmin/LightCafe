@@ -6,34 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
   <link rel="stylesheet" href="/styles/order_checkout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/common.css" type="text/css" />
   <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
+  
+  <%- include('partials/header') %>
 
-  <header>
-    <nav class="nav_bar">
-      <div class="container_fluid">
-        <a href="/" class="logo"><i class="fas fa-utensils"></i></a>
-        <a href="/checkout"><i class="fas fa-shopping-cart"></i></a>
-      </div>
-    </nav>
-  </header>
-  <main>
-
-    <h3>Your Order</h3>
-
+  <main class="order_main">
+    <h3 class="menu_select">Your Order</h3>
     <section class="final_order">
       <div class="order_reciept">
-            <h5>Order Reciept</h5>
+            <h5>Order Receipt</h5>
           <% for (let item in orders) { %>
-            <div class="item">
+            <div class="order_item">
               <span><%=orders[item].itemName%></span>
               <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
               <span>$<%=orders[item].totalPrice%></span>
@@ -50,10 +41,7 @@
                  <span>Total</span> <span><%= totalAmount %></span>
               </div>
             </div>
-            <!-- <label for="telephone">Enter your phone number </label>
-            <input id= "telephone" type="tel" name='telephone' placeholder="e.g. 123-234-1234">
-            <button  class="btn" type="submit" >Checkout</button> -->
-
+           
       </div>
       <form action="/orders" method="post">
         <div class="customer_info">
@@ -65,17 +53,20 @@
             <input id= "cname" name="cname" type="text" placeholder="Your Name">
 
 
-          <button id= "name-form" name="order" class="btn" type="submit" value="<%= JSON.stringify(orders) %>">Checkout</button>
-        </div>
 
       </form>
+
+    </div>
 
     </section>
   </main>
 
-  <footer>
-    <p>All copyrights reserved</p>
-  </footer>
+  
+  <button name="order" class="btn btn-dark" type="submit" value="<%= JSON.stringify(orders) %>">
+    <span>Checkout <i class="fa fa-mobile" aria-hidden="true"></i></span>
+  </button>
+
+  <%- include('partials/footer') %>
 
 
 </body>

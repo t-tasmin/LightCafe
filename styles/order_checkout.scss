@@ -1,77 +1,115 @@
-$primary_color : #BC7869;
-$secondary_color : #F5B57A;
-$price_color : rgb(86, 90, 93);
 @import 'breakpoints';
+@import 'colors';
 
-// main{
-//   @include md {
-//     padding-left: 10%;
-//     padding-right: 10%;
-//   }
-// }
-    .final_order {
-      padding: 1em;
-      margin: 1em;
+
+body {
+  height: 50em;
+  background: linear-gradient(165.26deg, $navWhite 1.96%, rgba(234, 198, 196, 0) 80.75%);
+}
+
+main {
+  @include md {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+  .final_order {
+    padding: 1em;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @include lg {
+      font-size: 1.3rem;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+
+  .order_reciept {
+    margin-bottom: 1em;
+    width: 50%;
+    @include lg{
+      flex-grow: 1;
+      padding-right: 20px;
+    }
+    .item {
       display: flex;
-      flex-direction: column;
-      width: 100%;
-      @include lg {
-        font-size: 1.3rem;
-        flex-direction: row;
-        justify-content: space-around;
+      justify-content: space-between;
+    }
+    .total_amount{
+      margin-top: 1em;
+      border-top: 2px solid black;
+      padding-top: 1em;
+      .amount:last-of-type {
+        margin-top: 1em;
+        padding-top: 1em;
+        border-top: solid 2px black;
       }
-
-
-      .order_reciept {
-        margin-bottom: 1em;
-        @include lg{
-          flex-grow: 2;
-          padding-right: 10px;
-        }
-        .item {
-          display: flex;
-          justify-content: space-between;
-        }
-        .total_amount{
-          margin-top: 1em;
-          border-top: 2px solid black;
-          padding-top: 1em;
-          .amount:last-of-type {
-            margin-top: 1em;
-            padding-top: 1em;
-            border-top: solid 2px black;
-          }
-          .amount {
-            display: flex;
-            justify-content: space-between  ;
-          }
-        }
-      }
-      .customer_info {
-        @include lg {
-          flex-grow: 1;
-          margin-left: 10px;
-          padding-left: 20px;
-          border-left: 1px solid gray;
-          padding-bottom: 20px;
-        }
+      .amount {
         display: flex;
-        flex-direction: column;
-      }
-      label {
-        margin: 10px 0;
-        align-self: flex-start;
-        @include md {
-          margin-top: 0;
-        }
-      }
-      input[type = tel],input[type = text] {
-        padding: 10px;
-        margin-bottom: 15px;
-        border: none;
-        border-radius: 10px;
-      }
-      .btn {
-        margin-top: 10px;
+        justify-content: space-between  ;
       }
     }
+  }
+  .customer_info {
+    @include lg {
+      flex-grow: 1;
+      margin-left: 50px;
+      padding-left:20px;
+      border-left: 1px solid gray;
+      padding-bottom: 20px;
+    }
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin: 10px 0;
+    align-self: flex-start;
+    @include md {
+      margin-top: 0;
+    }
+  }
+  input[type = tel],input[type = text] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+}
+
+.btn {
+  margin-top: 10px;
+  align-items: center;
+  margin-left: 20em;
+}
+
+.order_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+}
+
+
+footer {
+  color: $primaryBlack;
+  margin-top: 10em;
+  margin-bottom: 1em;
+}
+
+
+.menu_select {
+  margin-top: 2em;
+  margin-left: 8em;
+  font-size: 2em;
+  align-self: center;
+  color: $primaryGreen;
+  // background: -webkit-linear-gradient($primaryGreen, $secondary_color);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  font-family: "Source Sans Pro", sans-serif;
+}  
+
+

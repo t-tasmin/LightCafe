@@ -16,6 +16,7 @@ module.exports = (db) => {
 
 });
 
+
 //**************************POST ROUTE***************************/
   router.post("/", (req, res) => {
 
@@ -119,7 +120,7 @@ module.exports = (db) => {
 
                   let clientText_A = `Thank you for your order! ${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}!`;
                   let restaurantText = `${text}, Name: ${cname} , Phone: ${phone} .  Estimated pickup time: ${est_pickup_time}`;
-                  let r_phone = 6477461021; // restaurant phone number //--------------------- pending twilio fix
+                  let r_phone = 9052135569; // restaurant phone number //--------------------- pending twilio fix
                   sendSMS(phone, clientText_A);
                   sendSMS(r_phone, restaurantText);
                   console.log('-----------------------------------------------------------------------') //-------------------x
@@ -151,7 +152,7 @@ module.exports = (db) => {
   const templateVars = {
     script: 'Thank you for your order! Check your SMS for estimated time to pickup.'
   }
-  res.render('index', templateVars)
+  res.render('last')
 
   });
   return router;

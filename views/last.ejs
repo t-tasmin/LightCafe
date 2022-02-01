@@ -2,15 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>Menu Page</title>
+  <title>Last Page</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/last.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-
-  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/common.css" type="text/css" />
   <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -18,30 +16,16 @@
 
 <body>
 
-  <header>
-    <nav class="nav_bar">
-      <div class="container_fluid">
-        <a href="/" class="logo"><i class="fas fa-utensils"></i></a>
-        <a href="/checkout"><i class="fas fa-shopping-cart"></i></a>
-      </div>
-    </nav>
-  </header>
+  <%- include('partials/header') %>
+  
   <main>
-
-    <p>Thank You For the Order.</p>
-    <p>Your food will be ready by <%=time%>.</p>
-
-    <div id="visit">
-      <p><a class='btn' href="/">Visit Us Again</a></p>
+    <p>Thank you for your order! Check your SMS for estimated time to pickup.</p>
+    <div>
+      <p class="visit">Visit Us Again <i class="fa fa-smile-o" aria-hidden="true"></i></p>
     </div>
-
-    
   </main>
 
-  <footer>
-    <p>All copyrights reserved</p>
-  </footer>
-
+  <%- include('partials/footer') %>
 
 </body>
 

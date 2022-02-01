@@ -6,35 +6,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/common.css" type="text/css" />
   <script src="https://kit.fontawesome.com/9b1b322d51.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
+  
+  <%- include('partials/header') %>
 
-  <header>
-    <nav>
-      <div class="content-left">
-        <img src="/images/logo.png" class="logo" />
-        
-          <div class="title">
-            <span><i>Veggie D'Light</i></span>
-          </div>
-      </div>
-      <div class="content-right">
-          <a href="http://localhost:8080/checkout">
-             <span>Checkout</span>
-          </a>
-      </div>
-    </nav>
-  </header>
   <main>
     <% if (typeof script === 'string') {%>
       <div id='err_msg'>
@@ -42,43 +27,45 @@
       </div>
       <% } %>
 
-    <p>Choose your Menu:</p>
+    <p><span class="menu_select"><b>Our Menu</b></span></p>
 
-    <form action="/menus" method="post">
-      <div class="form_layout">
+    <form class="form_layout" action="/menus" method="post">
         <div class="menu_items">
           <% for (let item of menus) { %>
-                <div class="item">
-                  <label for="<%= item.name %>">
-                    <input id="<%= item.name.split(' ').join('') %>1" type="checkbox" name="itemName" value="<%= item.name %>">
-                    <span class="item_name"> <%= item.name %> </span>
-                    <span class="item_price">$<%= item.unit_price %> </span>
-                  </label>
-                  <input id="<%= item.name.split(' ').join('') %>2" type="number" name="numberOfItems" min="1" max="<%= item.number_available %>">
+              <div class="item">
+                <div class="image_container">
+                  <img class="item_img" src="<%= item.picture%>">
                 </div>
+                <label for="<%= item.name %>">
+                  <input id="<%= item.name.split(' ').join('') %>1" type="checkbox" name="itemName" value="<%= item.name %>">
+                  <span class="item_name"><b> <%= item.name %> </b></span>
+                  <br/>
+                  <span class="item_description"> <%= item.description%> </span>
+                  <br/>
+                  <span class="item_price"><b>$<%= item.unit_price %></b> </span>
+                </label>
+                <input id="<%= item.name.split(' ').join('') %>2" type="number" name="numberOfItems" min="1" max="<%= item.number_available %>">
+              </div>
 
-                <script>
-                  $('#<%= item.name.split(' ').join('') %>2, #<%= item.name.split(' ').join('') %>1').on('click', () => {
-                    if (document.getElementById('<%= item.name.split(' ').join('') %>1').checked) {
-                      $('#<%= item.name.split(' ').join('') %>2').focus();
-                    } else {
-                      $('#<%= item.name.split(' ').join('') %>2').val('');
-                      $('#<%= item.name.split(' ').join('') %>2').blur();;
-                    }
-                  });
-               </script>
-          <% } %>
-          </div>
-          <button id= "name-form" class="btn" type="submit" >Checkout</button>
-      </div>
-
+              <script>
+                $('#<%= item.name.split(' ').join('') %>2, #<%= item.name.split(' ').join('') %>1').on('click', () => {
+                  if (document.getElementById('<%= item.name.split(' ').join('') %>1').checked) {
+                    $('#<%= item.name.split(' ').join('') %>2').focus();
+                  } else {
+                    $('#<%= item.name.split(' ').join('') %>2').val('');
+                    $('#<%= item.name.split(' ').join('') %>2').blur();;
+                  }
+                });
+              </script>
+        <% } %>
+        </div>
+        <button type="submit" class="btn btn-dark" data-mdb-ripple-color="dark">
+          <span>Place Order <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+        </button>
     </form>
-
   </main>
 
-  <footer>
-    <p>All copyrights reserved</p>
-  </footer>
+  <%- include('partials/footer') %>
 
 
 </body>

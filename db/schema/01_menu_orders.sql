@@ -9,6 +9,7 @@ CREATE TABLE menu_dishes (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   picture TEXT NOT NULL,
+  description TEXT NOT NULL,
   unit_price INTEGER NOT NULL, -- price in cents
   number_available INTEGER NOT NULL, -- number of dishes available
   prep_time INTEGER NOT NULL,

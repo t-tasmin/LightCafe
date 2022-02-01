@@ -1,0 +1,30 @@
+@import 'breakpoints';
+@import 'colors';
+
+
+body {
+   height: 50em;
+   background: linear-gradient(165.26deg, $navWhite 1.96%, rgba(234, 198, 196, 0) 80.75%);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6em;
+  font-size: 2rem;
+} 
+
+.visit {
+margin-top: 2em;  
+color :$primaryGreen;
+}
+
+
+
+footer {
+  display: flex;
+  flex-direction: column;
+   margin-top: 20em;
+} 
+
