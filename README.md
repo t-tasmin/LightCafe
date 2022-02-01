@@ -1,5 +1,12 @@
 LHL Node Skeleton
 =========
+Final Product:
+
+ ## Product Demo
+
+![Home Page](./docs/Home.gif)
+
+![Menu page](./docs/Menu.gif)
 
 ## Project Setup
 
