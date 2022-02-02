@@ -9,6 +9,8 @@ Final Product:
 ![Menu page](./docs/Menu.gif)
 
 ![Restaurant page](./docs/restaurant.gif)
+
+
 ## Project Setup
 
 The following steps are only for _one_ of the group members to perform.
