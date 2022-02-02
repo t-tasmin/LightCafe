@@ -1,6 +1,6 @@
 # LightCafe
 
- LightCafe is a food pick-up ordering app that uses Twilio to connect customers to the restaurant. Customers can visit the Menu Page to select menu items and add them to their cart. On the order page, they can review the order and enter their name and phone number to confirm the order. Once the 'Checkout' button is pressed, both the restaurant and the customer receive text notifications to confirm their order. 
+ **LightCafe** is a food pick-up ordering app that uses Twilio to connect customers to the restaurant. Customers can visit the Menu Page to select menu items and add them to their cart. On the order page, they can review the order and enter their name and phone number to confirm the order. Once the 'Checkout' button is pressed, both the restaurant and the customer receive text notifications to confirm their order. 
 
  The admin or restaurant owner can navigate to their restaurant’s active order page that allows the restaurant to update order completion status. Once the order is ready for pick-up, the restaurant can remove the order by pressing 'Finish' button, the customer is then notified by text message that their order is ready for pick-up. 
 
@@ -21,7 +21,7 @@
 
 ## Project Setup
 
-1. git clone git@github.com:t-tasmin/LightCafe.git
+1. git clone git@github.com:t-tasmin/LightCafe.git   
 This will create a folder LightCafe on your local directory.
 
 2. You'll need to sign up for a Twilio trial account at https://www.twilio.com/ and create a phone number.
